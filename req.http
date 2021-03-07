@@ -1,0 +1,33 @@
+
+:host = http://127.0.0.1:8000/api
+:token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYxNTEwNzcxOCwiZXhwIjoxNjE1MTExMzE4LCJuYmYiOjE2MTUxMDc3MTgsImp0aSI6ImZ6QUhpSXdDTmJXQmtBVWIiLCJzdWIiOjMsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0OmxsE2xklUZkNWhrhEY8GjLiwJqeG1QsjrLbRxmAuA"
+#
+GET :host/login
+Content-Type: application/json
+#
+GET :host/register
+Content-Type: application/json
+#
+
+POST :host/register
+Content-Type: application/json
+Authorization: :token
+{
+    "name": "teling",
+    "email": "kamallllll@gmail.com",
+    "password": "T4mal#.",
+    "password_confirmation": "T4mal#."
+}
+#
+POST :host/login
+Content-Type: application/json
+Authorization: :token
+{
+    "email": "kamalll@gmail.com",
+    "password": "T4mal#."
+}
+
+#
+GET :host/user-profile
+Content-Type: application/json
+Authorization: :token
