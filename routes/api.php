@@ -25,16 +25,14 @@ Route::group([
     'middleware' => ['direct.to.user.profile'],
 ], function(){
     Route::get('/login', function (){
-        return response()->json([
-           'Massage' => 'login view',
-        ]);
+        return view('login');
     });
     Route::get('/register', function() {
         return response()->json([
            'Massage' => 'register view',
         ]);
     });
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/authen', [AuthController::class, 'authen']);
     Route::post('/register', [AuthController::class, 'register']);
 });
 
@@ -44,4 +42,7 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+    Route::get('/home', function() {
+       return view('welcome');
+    });
 });

@@ -11,9 +11,9 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.verify', ['except' => ['login', 'register']]);
+        $this->middleware('jwt.verify', ['except' => ['authen', 'register']]);
     }
-    public function login (Request $request)
+    public function authen (Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => [
@@ -26,11 +26,11 @@ class AuthController extends Controller
             ],
             'password' => [
                 'required',
-                'string',
-                'min:6',
-                'regex:/[a-z]/',      // must contain at least one lowercase letter
-                'regex:/[A-Z]/',      // must contain at least one uppercase letter
-                'regex:/[0-9]/',      // must contain at least one digit
+                //'string',
+                //'min:6',
+                //'regex:/[a-z]/',      // must contain at least one lowercase letter
+                //'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                //'regex:/[0-9]/',      // must contain at least one digit
                 //'regex:/[@$!%*#?&]/',  // must contain at least on special caracter
             ],
         ]);
@@ -39,7 +39,7 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 422);
         }
         if (! $token = Auth::attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json('Unauthorized', 401);
         }
         return $this->createNewToken($token);
     }
@@ -50,12 +50,12 @@ class AuthController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => ['required',
-                           'string',
-                           'min:6',
-                           'confirmed',
-                           'regex:/[a-z]/',      // must contain at least one lowercase letter
-                           'regex:/[A-Z]/',      // must contain at least one uppercase letter
-                           'regex:/[0-9]/',      // must contain at least one digit
+                           //'string',
+                           //'min:6',
+                           //'confirmed',
+                           //'regex:/[a-z]/',      // must contain at least one lowercase letter
+                           //'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                           //'regex:/[0-9]/',      // must contain at least one digit
             ],
         ]);
 
@@ -96,7 +96,8 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'user' => auth()->user(),
+            'directUrl' => url('api/home')
         ]);
     }
 }

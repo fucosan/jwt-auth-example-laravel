@@ -11,20 +11,18 @@ Content-Type: application/json
 
 POST :host/register
 Content-Type: application/json
-Authorization: :token
 {
-    "name": "teling",
-    "email": "kamallllll@gmail.com",
-    "password": "T4mal#.",
-    "password_confirmation": "T4mal#."
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "admin",
+    "password_confirmation": "admin"
 }
 #
-POST :host/login
+POST :host/authen
 Content-Type: application/json
-Authorization: :token
 {
-    "email": "kamalll@gmail.com",
-    "password": "T4mal#."
+    "email": "admin@gmail.com",
+    "password": "admin"
 }
 
 #
